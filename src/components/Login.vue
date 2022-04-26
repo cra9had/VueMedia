@@ -59,6 +59,7 @@ export default {
       console.log(responseJson)
       if (await response.status === 200) {
         localStorage.token = responseJson.token
+        await this.$router.push({ name: 'Home' })
       } else {
         Object.keys(responseJson).forEach(function (key, index) {
           document.getElementById('error').innerText = responseJson[key][0]
