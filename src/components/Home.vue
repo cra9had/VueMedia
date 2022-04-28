@@ -31,7 +31,7 @@
             <source :src="api_host + card.media_file" type="audio/mpeg" />
           </audio>
         </div>
-        <span>{{card.title}}</span>
+        <span>{{card.title}}<input type="button" value="+" :id="card.pk" v-on:click="ChoiceContent"></span>
       </div>
     </div>
   </div>
@@ -60,6 +60,33 @@ export default {
       this.$router.push({ name: 'LoginPage' })
     },
 
+    async ChoiceContent (e) {
+      const mediaId = e.target.id
+      const tags = []
+      for (let i = 0; i < this.selectedTags.length; i++) {
+        tags.push(this.selectedTags[i].pk)
+      }
+      const response = await fetch(this.$api_host + 'content/choose', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          Authorization: 'token ' + localStorage.token
+        },
+        body: JSON.stringify({
+          tags: tags,
+          media_content: mediaId
+        })
+      })
+      if (await response.status === 200) {
+        const buttons = document.getElementsByTagName('input')
+        for (let i = 0; i < buttons.length; i++) {
+          if (buttons[i].type === 'button') {
+            buttons[i].remove()
+          }
+        }
+      }
+    },
+
     deleteSelectedTag (e) {
       const body = e.target.innerText
       for (let i = 0; i < this.selectedTags.length; i++) {
@@ -80,9 +107,17 @@ export default {
 
     addTag (e) {
       const body = e.target.innerText
+      let pk = 0
+      for (let i = 0; i < this.searchTags.length; i++) {
+        if (this.searchTags[i].body === body) {
+          pk = this.searchTags[i].pk
+          break
+        }
+      }
       document.getElementById('searchInput').value = ''
       if (!this.selectedTags.some(e => e.body === body)) {
-        this.selectedTags.push({ body: body })
+        this.selectedTags.push({ body: body, pk: pk })
+        console.log(this.selectedTags)
         this.loadContent()
       }
       this.deleteTags()
@@ -93,7 +128,6 @@ export default {
       for (let i = 0; i < this.selectedTags.length; i++) {
         tags.push({ body: this.selectedTags[i].body })
       }
-      console.log(tags)
       const response = await fetch(this.$api_host + 'content/content', {
         method: 'POST',
         headers: {
