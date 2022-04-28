@@ -1,5 +1,6 @@
 <template>
   <div>
+    <a :href="api_host">назад</a>
     <div v-for="(history, index) in history" :key="index">
       <div class="contentImageContainer">
         <img class="contentImage" :src="api_host + history.media_content.media_file" v-if="history.media_content.media_type === '1'">

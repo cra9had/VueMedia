@@ -5,6 +5,7 @@
         <a class="navbar-brand" href="#">
           <img src="https://getbootstrap.com/docs/5.1/assets/brand/bootstrap-logo.svg" alt="" width="30" height="24">
         </a>
+        <a class="nav-link" href="/history">История</a>
       </div>
       <div class="d-flex">
         <button type="button" class="btn btn-light" v-on:click="exit">Выйти</button>
