@@ -7,7 +7,7 @@
       </div>
       <input type="submit" class="fadeIn fourth" value="Log In" v-on:click="Login">
       <div id="formFooter">
-        <a class="underlineHover" v-on:click="goRegisterPage">Ещё не зарегестрированы?</a>
+        <a class="underlineHover" href="register">Ещё не зарегестрированы?</a>
       </div>
 
     </div>
@@ -18,8 +18,8 @@
 export default {
   name: 'Login',
   methods: {
-    goRegisterPage () {
-      this.$router.push({ name: 'LoginPage' })
+    async goRegisterPage () {
+      await this.$router.push({ name: 'LoginPage' })
     },
 
     async checkToken () {

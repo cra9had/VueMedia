@@ -207,7 +207,7 @@ export default {
 .content {
   display: grid;
   grid-template-columns: repeat(3, 300px);
-  grid-column-gap: 20px;
+  grid-column-gap: 15%;
   grid-row-gap: 20px;
   margin-top: 2rem;
 }
