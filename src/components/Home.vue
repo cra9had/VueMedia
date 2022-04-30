@@ -32,7 +32,7 @@
             <source :src="api_host + card.media_file" type="audio/mpeg" />
           </audio>
         </div>
-        <span>{{card.title}}<input type="button" value="+" :id="card.pk" v-on:click="ChoiceContent"></span>
+        <span>{{card.title}}<input type="button" class="AddButton" value="+" :id="card.pk" v-on:click="ChoiceContent"></span>
       </div>
     </div>
   </div>
@@ -78,10 +78,12 @@ export default {
           media_content: mediaId
         })
       })
+      console.log(await response.status)
       if (await response.status === 200) {
-        const buttons = document.getElementsByTagName('input')
-        for (let i = 0; i < buttons.length; i++) {
-          if (buttons[i].type === 'button') {
+        let buttons = document.getElementsByClassName('AddButton')
+        for (let j = 0; j < 40; j++) {
+          buttons = document.getElementsByClassName('AddButton')
+          for (let i = 0; i < buttons.length; i++) {
             buttons[i].remove()
           }
         }
