@@ -148,7 +148,7 @@ export default {
       }
     },
     async loadTags (e) {
-      const searchTag = e.target.value
+      const searchTag = e.target.value.toLowerCase()
       if (!searchTag) {
         this.searchTags = []
         return
