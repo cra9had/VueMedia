@@ -81,7 +81,7 @@ export default {
       console.log(await response.status)
       if (await response.status === 200) {
         let buttons = document.getElementsByClassName('AddButton')
-        for (let j = 0; j < 40; j++) {
+        while (buttons.length !== 0) {
           buttons = document.getElementsByClassName('AddButton')
           for (let i = 0; i < buttons.length; i++) {
             buttons[i].remove()
