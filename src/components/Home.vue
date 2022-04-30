@@ -140,6 +140,10 @@ export default {
         })
       })
       this.content = await response.json()
+      const videos = document.getElementsByTagName('video')
+      for (let i = 0; i < videos.length; i++) {
+        videos[i].load()
+      }
     },
     async loadTags (e) {
       const searchTag = e.target.value
